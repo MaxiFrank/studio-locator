@@ -9,5 +9,4 @@ public class StudioLocatorAppApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(StudioLocatorAppApplication.class, args);
 	}
-
 }

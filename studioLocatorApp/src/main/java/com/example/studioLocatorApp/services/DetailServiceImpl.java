@@ -26,9 +26,13 @@ public class DetailServiceImpl implements DetailService {
 //    need to use studioId as well, how to add a row in postgres using duo id?
     public void addDetail(DetailDto detailDto, Long userId, Long studioId) {
         Optional<User> userOptional = userRepository.findById(userId);
-//        Detail detail = new Detail(detailDto);
-//        userOptional.ifPresent(detail::setUser);
-//        detailRepository.saveAndFlush(detail);
+        Detail detail = new Detail(detailDto);
+//        operates as a lambda function under the hood, give userOption as the input to setUser
+//        detail specifies that this stuff is owned by the detail object
+//        same as detail.setUser
+//        if I swap :: for a . if should still work
+        userOptional.ifPresent(detail::setUser);
+        detailRepository.saveAndFlush(detail);
     }
 
 //    @Override

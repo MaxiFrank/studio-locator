@@ -5,9 +5,6 @@ import com.example.studioLocatorApp.services.DetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
-
 @RestController
 @RequestMapping("api/v1/details")
 public class DetailController {
@@ -19,9 +16,11 @@ public class DetailController {
 //        return detailService.getAllDetailsByUserId(userId);
 //    }
 //
-    @PostMapping("/user/{userId}")
-    public void addDetail(@RequestBody DetailDto detailDto, @PathVariable Long userId, @PathVariable Long studioId){
+//    I am hitting the right endpoint on postman but am still not able to add a detail into the database...
+    @PostMapping("/user/{userId}/studio/{studioId}")
+    public String addDetail(@RequestBody DetailDto detailDto, @PathVariable Long userId, @PathVariable Long studioId){
         detailService.addDetail(detailDto, userId, studioId);
+        return "studio details added";
     }
 //
 //    @DeleteMapping("/{detailId}")

@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 @Entity
-//@IdClass( PK.class )
 @Table(name = "Details")
 @Data
 @AllArgsConstructor
