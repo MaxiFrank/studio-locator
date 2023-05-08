@@ -10,15 +10,15 @@ public interface DetailService {
     @Transactional
     void addDetail(DetailDto detailDto, Long userId, Long studioId);
 
-//    @Transactional
-//    void deleteDetailById(Long detailId);
-//
-//    @Transactional
-//    void updateDetailById(DetailDto detailDto);
-//
-//    @Transactional
-//    List<DetailDto> getAllDetailsByUserId(Long userId);
-//
-//    @Transactional
-//    Optional<DetailDto> getDetailbyId(Long noteId);
+    @Transactional
+    void deleteDetailByIds(Long userUserId, Long studioId);
+
+    @Transactional
+    void updateDetailByIds(DetailDto detailDto, Long userUserId, Long studioId);
+
+    @Transactional
+    List<DetailDto> getAllDetailsByUserId(Long userId);
+
+    @Transactional
+    Optional<DetailDto> getDetailbyIds(Long userUserId, Long studioId);
 }

@@ -5,36 +5,38 @@ import com.example.studioLocatorApp.services.DetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+
 @RestController
 @RequestMapping("api/v1/details")
 public class DetailController {
     @Autowired
     private DetailService detailService;
 
-//    @GetMapping("/user/{userId}")
-//    public List<DetailDto> getDetailsByUser(@PathVariable Long userId) {
-//        return detailService.getAllDetailsByUserId(userId);
-//    }
-//
-//    I am hitting the right endpoint on postman but am still not able to add a detail into the database...
+    @GetMapping("/user/{userId}")
+    public List<DetailDto> getDetailsByUser(@PathVariable Long userId) {
+        return detailService.getAllDetailsByUserId(userId);
+    }
+
     @PostMapping("/user/{userId}/studio/{studioId}")
     public String addDetail(@RequestBody DetailDto detailDto, @PathVariable Long userId, @PathVariable Long studioId){
         detailService.addDetail(detailDto, userId, studioId);
         return "studio details added";
     }
-//
-//    @DeleteMapping("/{detailId}")
-//    public void deleteDetailById(@PathVariable Long detailId){
-//        detailService.deleteDetailById(detailId);
-//    }
-//
-//    @PutMapping
-//    public void updateDetail(@RequestBody DetailDto detailDto){
-//        detailService.updateDetailById(detailDto);
-//    }
-//
-//    @GetMapping("/{detailId}")
-//    public Optional<DetailDto> getDetailById(@PathVariable Long detailId) {
-//        return detailService.getDetailbyId(detailId);
-//    }
+
+    @DeleteMapping("/{userUserId}/{studioId}")
+    public void deleteDetailByIds(@PathVariable Long userUserId, @PathVariable Long studioId){
+        detailService.deleteDetailByIds(userUserId, studioId);
+    }
+
+    @PutMapping("/user/{userUserId}/studio/{studioId}")
+    public void updateDetailByIds(@RequestBody DetailDto detailDto, @PathVariable Long userUserId, @PathVariable Long studioId){
+        detailService.updateDetailByIds(detailDto, userUserId, studioId);
+    }
+
+    @GetMapping("/user/{userUserId}/studio/{studioId}")
+    public Optional<DetailDto> getDetailByIds(@PathVariable Long userUserId, @PathVariable Long studioId) {
+        return detailService.getDetailbyIds(userUserId, studioId);
+    }
 }

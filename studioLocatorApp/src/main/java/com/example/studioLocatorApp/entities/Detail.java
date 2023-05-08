@@ -3,9 +3,7 @@ package com.example.studioLocatorApp.entities;
 import com.example.studioLocatorApp.dtos.DetailDto;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -14,6 +12,8 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class Detail {
 
     @Id
@@ -24,7 +24,7 @@ public class Detail {
     private String note;
 
     @Column
-    private String reviewScore;
+    private Integer reviewScore;
 
     @Column
     private Boolean isPublic;
@@ -36,6 +36,12 @@ public class Detail {
     public Detail(DetailDto detailDto) {
         if (detailDto.getNote() != null) {
             this.note = detailDto.getNote();
+        }
+        if (detailDto.getReviewScore() != null) {
+            this.reviewScore = detailDto.getReviewScore();
+        }
+        if (detailDto.getIsPublic() != null) {
+            this.isPublic = detailDto.getIsPublic();
         }
     }
 }
