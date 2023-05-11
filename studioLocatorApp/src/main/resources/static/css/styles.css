@@ -35,7 +35,8 @@
 .homepage_background{
     background-color: rgb(247, 247, 249);
     height: calc(100vh - 100px);
-    margin-top: 20px;
+    margin-top: 0px;
+    margin-right: 0px;
     padding: 100px 40px 0px;
   }
 

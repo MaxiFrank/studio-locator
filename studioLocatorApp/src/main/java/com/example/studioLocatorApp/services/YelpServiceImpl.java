@@ -15,11 +15,11 @@ import java.io.IOException;
 @Service
 public class YelpServiceImpl implements YelpService {
 
-//    @Autowired
-//    private UserRepository userRepository;
-//
-//    @Autowired
-//    private DetailRepository detailRepository;
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private DetailRepository detailRepository;
 
     @Transactional
     public String findStudios(String zipCode) throws IOException {
@@ -34,9 +34,8 @@ public class YelpServiceImpl implements YelpService {
                 .url(url)
                 .get()
                 .addHeader("accept", "application/json")
-                .addHeader("Authorization", "fake-bearer-token")
+                .addHeader("Authorization", "fake-auth-key")
                 .build();
-
         Response response = client.newCall(request).execute();
         String responseString = response.body().string();
         System.out.println("Yelp API response is received and processed");

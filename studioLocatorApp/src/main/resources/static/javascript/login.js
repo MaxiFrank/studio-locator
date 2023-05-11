@@ -26,10 +26,10 @@ const handleSubmit = async (e) =>{
     const responseArr = await response.json()
 
     if (response.status === 200){
-        document.cookie = `userId=${responseArr[1]}`
+//    doesn't actually set cookies here
+        document.cookie = `key=fake-cookie`
         window.location.replace(responseArr[0])
     }
 }
-
 loginForm.addEventListener("submit", handleSubmit)
 

@@ -3,11 +3,9 @@ package com.example.studioLocatorApp.controllers;
 import com.example.studioLocatorApp.dtos.UserDto;
 import com.example.studioLocatorApp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.ui.Model;
-import org.springframework.web.servlet.ModelAndView;
+
 
 import java.util.List;
 
@@ -29,7 +27,13 @@ public class UserController {
 
     @PostMapping("/login")
     public List<String> userLogin(@RequestBody UserDto userDto) {
-        return userService.userLogin(userDto);
+        List<String> response = userService.userLogin(userDto);
+        return response;
+    }
+
+    @GetMapping("/logout")
+    public List<String> userLogout(@RequestBody UserDto userDto) {
+        return userService.userLogout(userDto);
     }
 
 }

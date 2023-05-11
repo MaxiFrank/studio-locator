@@ -12,4 +12,7 @@ public interface UserService {
     @Transactional
     List<String> userLogin(UserDto userDto);
 
+    @Transactional
+    List<String> userLogout(UserDto userDto);
+
 }
