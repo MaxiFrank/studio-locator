@@ -40,7 +40,7 @@ public class YelpServiceImpl implements YelpService {
                 .url(url)
                 .get()
                 .addHeader("accept", "application/json")
-                .addHeader("Authorization", "Bearer DSUL4mv3XUKeZh2hpifLmvbvlaSH28IQgjKZRQwQqokAnOpm_BuvDt0eoaHlGWJkVab1NnQ2a0BYhGuEudy65RTI-82hEy7_91TnoOApPacbE-D9pD6tNy4G3gVHZHYx")
+                .addHeader("Authorization", "fake-token")
                 .build();
         Response response = client.newCall(request).execute();
         String responseString = response.body().string();
