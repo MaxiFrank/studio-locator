@@ -3,6 +3,7 @@ package com.example.studioLocatorApp.services;
 import com.example.studioLocatorApp.dtos.UserDto;
 import com.example.studioLocatorApp.entities.User;
 import com.example.studioLocatorApp.repositories.UserRepository;
+
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,7 +26,7 @@ public class UserServiceImpl implements UserService {
         List<String> response = new ArrayList<>();
         User user = new User(userDto);
         userRepository.saveAndFlush(user);
-        response.add("http://localhost:8080/login.html");;
+        response.add("You have successfully registered");
         return response;
     }
 
@@ -33,16 +34,32 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public List<String> userLogin(UserDto userDto) {
         List<String> response = new ArrayList<>();
+        response.add("/index.html");
         Optional<User> userOptional = userRepository.findByUsername(userDto.getUsername());
         if (userOptional.isPresent()) {
             if (passwordEncoder.matches(userDto.getPassword(), userOptional.get().getPassword())) {
-                response.add("http://localhost:8080/home.html");
+                response.add("You've logged in");
                 response.add(String.valueOf(userOptional.get().getUserId()));
+                response.add(String.valueOf(userOptional.get().getPassword()));
             } else {
                 response.add("Username or password incorrect");
             }
         } else {
             response.add("Username or password incorrect");
+        }
+        return response;
+    }
+
+    @Override
+    @Transactional
+    public List<String> userLogout(UserDto userDto) {
+        List<String> response = new ArrayList<>();
+        response.add("/index.html");
+        Optional<User> userOptional = userRepository.findByUsername(userDto.getUsername());
+        if (userOptional.isPresent()) {
+            response.add("you've logged out");
+        } else {
+            response.add("You were not logged in");
         }
         return response;
     }

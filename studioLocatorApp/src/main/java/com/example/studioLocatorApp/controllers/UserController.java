@@ -4,10 +4,9 @@ import com.example.studioLocatorApp.dtos.UserDto;
 import com.example.studioLocatorApp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
@@ -29,7 +28,13 @@ public class UserController {
 
     @PostMapping("/login")
     public List<String> userLogin(@RequestBody UserDto userDto) {
-        return userService.userLogin(userDto);
+        List<String> response = userService.userLogin(userDto);
+        return response;
+    }
+
+    @PostMapping("/logout")
+    public List<String> userLogout(@RequestBody UserDto userDto) {
+        return userService.userLogout(userDto);
     }
 
 }

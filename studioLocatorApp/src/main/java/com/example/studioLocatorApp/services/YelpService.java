@@ -1,9 +1,10 @@
 package com.example.studioLocatorApp.services;
 
-import com.example.studioLocatorApp.controllers.YelpController;
+import jakarta.transaction.Transactional;
+import java.io.IOException;
+import java.util.List;
 
-public class YelpService {
-    YelpController yelpController = new YelpController();
-    yelpController.connect();
-
+public interface YelpService {
+    @Transactional
+    List<String> findStudios(String zipCode) throws IOException;
 }

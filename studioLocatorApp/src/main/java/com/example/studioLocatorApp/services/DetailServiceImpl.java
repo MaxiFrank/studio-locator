@@ -5,6 +5,8 @@ import com.example.studioLocatorApp.entities.Detail;
 import com.example.studioLocatorApp.entities.User;
 import com.example.studioLocatorApp.repositories.DetailRepository;
 import com.example.studioLocatorApp.repositories.UserRepository;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.ManyToOne;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,41 +37,42 @@ public class DetailServiceImpl implements DetailService {
         detailRepository.saveAndFlush(detail);
     }
 
-//    @Override
-//    @Transactional
-//    public void deleteDetailById(Long detailId) {
-//        Optional<Detail> detailOptional = detailRepository.findById(detailId);
-//        detailOptional.ifPresent(detail -> detailRepository.delete(detail));
-//    }
-//
-//    @Override
-//    @Transactional
-//    public void updateDetailById(DetailDto detailDto) {
-//        Optional<Detail> detailOptional = detailRepository.findById(detailDto.getUserId());
-//        detailOptional.ifPresent(detail -> {
-//            detail.setNote(detailDto.getNote());
-//            detailRepository.saveAndFlush(detail);
-//        });
-//    }
-//
-//    @Override
-//    @Transactional
-//    public List<DetailDto> getAllDetailsByUserId(Long userId){
-//        Optional<User> userOptional = userRepository.findById(userId);
-//        if (userOptional.isPresent()){
-//            List<Detail> detailList = detailRepository.findAllByUserEquals(userOptional.get());
-//            return detailList.stream().map(detail -> new DetailDto(detail)).collect(Collectors.toList());
-//        }
-//        return Collections.emptyList();
-//    }
-//
-//    @Override
-//    @Transactional
-//    public Optional<DetailDto> getDetailbyId(Long noteId) {
-//        Optional<Detail> detailOptional = detailRepository.findById(noteId);
-//        if (detailOptional.isPresent()) {
-//            return Optional.of(new DetailDto(detailOptional.get()));
-//        }
-//        return Optional.empty();
-//    }
+    @Override
+    @Transactional
+//    need to user userId and studioId to find the detail that I want to delete
+    public void deleteDetailByIds(Long userUserId, Long studioId) {
+        Optional<Detail> detailOptional = detailRepository.findAllByUserUserIdAndStudioId(userUserId, studioId);
+        detailOptional.ifPresent(detail -> detailRepository.delete(detail));
+    }
+
+    @Override
+    @Transactional
+    public void updateDetailByIds(DetailDto detailDto, Long userUserId, Long studioId) {
+        Optional<Detail> detailOptional = detailRepository.findByUserUserIdAndStudioId(userUserId, studioId);
+        detailOptional.ifPresent(detail -> {
+            detail.setNote(detailDto.getNote());
+            detailRepository.saveAndFlush(detail);
+        });
+    }
+
+    @Override
+    @Transactional
+    public List<DetailDto> getAllDetailsByUserId(Long userId){
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isPresent()){
+            List<Detail> detailList = detailRepository.findAllByUserEquals(userOptional.get());
+            return detailList.stream().map(detail -> new DetailDto(detail)).collect(Collectors.toList());
+        }
+        return Collections.emptyList();
+    }
+
+    @Override
+    @Transactional
+    public Optional<DetailDto> getDetailbyIds(Long userUserId, Long studioId) {
+        Optional<Detail> detailOptional = detailRepository.findAllByUserUserIdAndStudioId(userUserId, studioId);
+        if (detailOptional.isPresent()) {
+            return Optional.of(new DetailDto(detailOptional.get()));
+        }
+        return Optional.empty();
+    }
 }

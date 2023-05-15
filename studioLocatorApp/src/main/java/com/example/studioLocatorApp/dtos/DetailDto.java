@@ -15,7 +15,7 @@ public class DetailDto implements Serializable {
 //    private Long userId;
     private Long studioId;
     private String note;
-    private String reviewScore;
+    private Integer reviewScore;
     private Boolean isPublic;
     private UserDto userDto;
 
