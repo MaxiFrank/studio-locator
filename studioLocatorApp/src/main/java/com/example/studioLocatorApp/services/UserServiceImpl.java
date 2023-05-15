@@ -40,6 +40,7 @@ public class UserServiceImpl implements UserService {
             if (passwordEncoder.matches(userDto.getPassword(), userOptional.get().getPassword())) {
                 response.add("You've logged in");
                 response.add(String.valueOf(userOptional.get().getUserId()));
+                response.add(String.valueOf(userOptional.get().getPassword()));
             } else {
                 response.add("Username or password incorrect");
             }
@@ -53,9 +54,10 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public List<String> userLogout(UserDto userDto) {
         List<String> response = new ArrayList<>();
+        response.add("/index.html");
         Optional<User> userOptional = userRepository.findByUsername(userDto.getUsername());
         if (userOptional.isPresent()) {
-            response.add("You've been logged out");
+            response.add("you've logged out");
         } else {
             response.add("You were not logged in");
         }

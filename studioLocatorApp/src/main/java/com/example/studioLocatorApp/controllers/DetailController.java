@@ -1,9 +1,12 @@
 package com.example.studioLocatorApp.controllers;
 
+
 import com.example.studioLocatorApp.dtos.DetailDto;
 import com.example.studioLocatorApp.services.DetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +21,13 @@ public class DetailController {
     public List<DetailDto> getDetailsByUser(@PathVariable Long userId) {
         return detailService.getAllDetailsByUserId(userId);
     }
+
+//    @PostMapping("/matching-studios")
+//    public String addDetail(@ModelAttribute DetailDto detailDto, Model model){
+//        model.addAttribute("detailDto", detailDto);
+//        detailService.addDetail(detailDto, userId, studioId);
+//        return "studio details added";
+//    }
 
     @PostMapping("/user/{userId}/studio/{studioId}")
     public String addDetail(@RequestBody DetailDto detailDto, @PathVariable Long userId, @PathVariable Long studioId){

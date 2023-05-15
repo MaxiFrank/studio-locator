@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,26 +10,31 @@
     <link rel="stylesheet" href="css/styles.css">
     <title>
     </title>
+
 </head>
 <body>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-<!--    conditional log out -->
     <ul class="navbar-nav ml-auto">
-        <li class="nav-item active"></li>
-        <form class="form-login" method="GET" action='/'>
-            <li class="nav-item active"></li>
-            <a class="nav-link" id='signOut' data-target="#exampleModal">Log Out<span
-                    class="sr-only">(current)</span></a>
-            </button>
-        </form>
-        <!--    conditional log out -->
-        <li class="nav-item active text-left"></li>
-        <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal">Login<span
-                class="sr-only">(current)</span></a>
+
+        <script type="text/javascript" id="log-out-tag">
+        if (document.cookie){
+        node = document.getElementById("log-out-tag");
+        htmlInsert = '<li class="nav-item active"></li><form class="form-login" id="logout-form"><li class="nav-item active"></li> <a href="/" class="nav-link" id="signOut" data-target="#exampleModal">Log Out<span class="sr-only">(current)</span></a></button></form>';
+        node.insertAdjacentHTML('afterend', htmlInsert);}
+        </script>
+
+        <Script type="text/javascript" id="log-in-tag">
+        if (!document.cookie) {
+        node = document.getElementById("log-in-tag");
+        htmlInsert = '<li class="nav-item active text-left"></li><a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal">Login<span class="sr-only">(current)</span></a>';
+        node.insertAdjacentHTML('afterend', htmlInsert);}
+        </script>
+
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
              aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -41,11 +46,11 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form class="form-login mb-2" method="GET" action='/login.html'>
+                        <form class="form-login mb-2" method="GET" action="/login.html">
                             <button id='signIn' class="btn btn-block btn-outline-secondary modal-button" type="submit">Log in
                             </button>
                         </form>
-                        <form class="form-create-account" method="GET" action='/register.html'>
+                        <form class="form-create-account" method="GET" action="/register.html">
                             <button class="btn btn-block btn-outline-secondary modal-button" type="submit">Create Account
                             </button>
                         </form>
@@ -75,7 +80,7 @@
             <div class='container-fluid homepage_background align-items-center justify-content-center'>
                 <div class="row">
                     <div class="col align-items-center justify-content-center">
-                        <button class="btn btn-outline-secondary homepage_button" onclick="location.href = '/current_location';"
+                        <button class="btn btn-outline-secondary homepage_button" onclick="location.href = '/studios.html';"
                         >Search by zip code</button>
                     </div>
                 </div>

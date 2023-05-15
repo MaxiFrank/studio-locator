@@ -25,8 +25,8 @@ public class YelpController {
 //        return detailService.getAllNotesByUserId(userId);
 //    }
 
-    @GetMapping("/find-studios/zipcode/{zipCode}")
-    public String getStudios(@PathVariable String zipCode) throws IOException {
+    @GetMapping("/locate")
+    public List<String> getStudios(@RequestParam String zipCode) throws IOException {
         return yelpService.findStudios(zipCode);
     }
 
