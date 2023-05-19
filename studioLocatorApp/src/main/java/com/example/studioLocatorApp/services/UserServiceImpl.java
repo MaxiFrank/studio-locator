@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
         if (userOptional.isPresent()) {
             if (passwordEncoder.matches(userDto.getPassword(), userOptional.get().getPassword())) {
                 response.add("You've logged in");
-                response.add(String.valueOf(userOptional.get().getUserId()));
+                response.add(String.valueOf(userOptional.get().getUsername()));
                 response.add(String.valueOf(userOptional.get().getPassword()));
             } else {
                 response.add("Username or password incorrect");

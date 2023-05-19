@@ -21,6 +21,9 @@ public class Detail {
     private Long studioId;
 
     @Column(columnDefinition = "text")
+    private String studioName;
+
+    @Column(columnDefinition = "text")
     private String note;
 
     @Column
@@ -42,6 +45,8 @@ public class Detail {
         }
         if (detailDto.getIsPublic() != null) {
             this.isPublic = detailDto.getIsPublic();
+        }if (detailDto.getStudioName() != null) {
+            this.studioName = detailDto.getStudioName();
         }
     }
 }

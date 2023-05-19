@@ -5,12 +5,11 @@ import com.example.studioLocatorApp.entities.Detail;
 import com.example.studioLocatorApp.entities.User;
 import com.example.studioLocatorApp.repositories.DetailRepository;
 import com.example.studioLocatorApp.repositories.UserRepository;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.ManyToOne;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -25,8 +24,12 @@ public class DetailServiceImpl implements DetailService {
 
     @Override
     @Transactional
-//    need to use studioId as well, how to add a row in postgres using duo id?
-    public void addDetail(DetailDto detailDto, Long userId, Long studioId) {
+    public void addDetail(DetailDto detailDto, Long userId) {
+        //    need to use studioId as well, how to add a row in postgres using duo id?
+//    user is here but details haven't been created, shouldn't I be passing in the userDto instead of detailDto?
+//        how do I find the user now???
+//        Should I save this in a cookie so I can get it back in javascript? but I don't get user id until user
+//        gets created in login and then saved in the database....
         Optional<User> userOptional = userRepository.findById(userId);
         Detail detail = new Detail(detailDto);
 //        operates as a lambda function under the hood, give userOption as the input to setUser
