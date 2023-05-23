@@ -22,13 +22,14 @@ const response = await fetch(`${baseUrl}/visited/user/${userId}`, {
 
 
 
+
 //how do I get the response out? I'd like to see the details dto here and set it in window.localStroage
 // with name "studios-visited". Not finding an easy way to do it
 
 //reason that it just goes in a loop isn't the fact that I am not logged in.
         if (response.status === 200){
-            const detailDtoList = [];
-            responseDetail.forEach(dto => {console.log(dto)})
+//            const detailDtoList = [];
+//            responseDetail.forEach(dto => {console.log(dto)})
             window.localStorage.setItem("studios-visited", responseDetail);
         }
 }
