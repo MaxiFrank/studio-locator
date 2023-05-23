@@ -6,14 +6,13 @@ import com.example.studioLocatorApp.entities.User;
 import com.example.studioLocatorApp.repositories.DetailRepository;
 import com.example.studioLocatorApp.repositories.UserRepository;
 import jakarta.transaction.Transactional;
+import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
+
 
 @Service
 public class DetailServiceImpl implements DetailService {
@@ -58,16 +57,41 @@ public class DetailServiceImpl implements DetailService {
         });
     }
 
-    @Override
-    @Transactional
-    public List<DetailDto> getAllDetailsByUserId(Long userId){
-        Optional<User> userOptional = userRepository.findById(userId);
-        if (userOptional.isPresent()){
-            List<Detail> detailList = detailRepository.findAllByUserEquals(userOptional.get());
-            return detailList.stream().map(detail -> new DetailDto(detail)).collect(Collectors.toList());
-        }
-        return Collections.emptyList();
+//    @Override
+//    @Transactional
+//    public List<String> getAllDetailsByUserId(Long userId){
+//        Optional<User> userOptional = userRepository.findById(userId);
+//        List<String> responseArr = new ArrayList<>();
+//        if (userOptional.isPresent()){
+//            List<Detail> detailList = detailRepository.findAllByUserEquals(userOptional.get());
+//
+//            System.out.println("this is what detail list looks like");
+//            for (Detail detail:  detailList){
+//                List<String> studioDetail = new ArrayList<>();
+//                studioDetail.add(detail.getStudioName());
+//                studioDetail.add(detail.getNote());
+//                studioDetail.add(Integer.toString(detail.getReviewScore()));
+//                studioDetail.add(Boolean.toString(detail.getIsPublic()));
+//                responseArr.add(String.join("|", studioDetail));
+//            }
+//            return responseArr;
+////            return detailList.stream().map(detail -> new DetailDto(detail)).collect(Collectors.toList());
+//        }
+//        return Collections.emptyList();
+//    }
+@Override
+@Transactional
+public List<DetailDto> getAllDetailsByUserId(Long userId){
+    Optional<User> userOptional = userRepository.findById(userId);
+    List<String> responseArr = new ArrayList<>();
+    if (userOptional.isPresent()){
+        List<Detail> detailList = detailRepository.findAllByUserEquals(userOptional.get());
+
+        System.out.println("this is what detail list looks like");
+        return detailList.stream().map(detail -> new DetailDto(detail)).collect(Collectors.toList());
     }
+    return Collections.emptyList();
+}
 
     @Override
     @Transactional
