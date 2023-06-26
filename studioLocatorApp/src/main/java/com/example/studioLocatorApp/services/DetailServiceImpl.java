@@ -24,24 +24,14 @@ public class DetailServiceImpl implements DetailService {
     @Override
     @Transactional
     public void addDetail(DetailDto detailDto, Long userId) {
-        //    need to use studioId as well, how to add a row in postgres using duo id?
-//    user is here but details haven't been created, shouldn't I be passing in the userDto instead of detailDto?
-//        how do I find the user now???
-//        Should I save this in a cookie so I can get it back in javascript? but I don't get user id until user
-//        gets created in login and then saved in the database....
         Optional<User> userOptional = userRepository.findById(userId);
         Detail detail = new Detail(detailDto);
-//        operates as a lambda function under the hood, give userOption as the input to setUser
-//        detail specifies that this stuff is owned by the detail object
-//        same as detail.setUser
-//        if I swap :: for a . if should still work
         userOptional.ifPresent(detail::setUser);
         detailRepository.saveAndFlush(detail);
     }
 
     @Override
     @Transactional
-//    need to user userId and studioId to find the detail that I want to delete
     public void deleteDetailByIds(Long userUserId, Long studioId) {
         Optional<Detail> detailOptional = detailRepository.findAllByUserUserIdAndStudioId(userUserId, studioId);
         detailOptional.ifPresent(detail -> detailRepository.delete(detail));

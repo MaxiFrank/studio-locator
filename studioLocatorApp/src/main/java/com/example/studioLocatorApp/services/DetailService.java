@@ -12,7 +12,6 @@ public interface DetailService {
     void addDetail(DetailDto detailDto, Long userId);
 
     @Transactional
-//    need to user userId and studioId to find the detail that I want to delete
     void deleteDetailByIds(Long userUserId, Long studioId);
 
     @Transactional

@@ -20,26 +20,9 @@ public class YelpController {
     }
     @Autowired
     private YelpService yelpService;
-//    @GetMapping("/user/{userId}")
-//    public List<DetailDto> getNotesByUser(@PathVariable Long userId) {
-//        return detailService.getAllNotesByUserId(userId);
-//    }
-
     @GetMapping("/locate")
     public List<String> getStudios(@RequestParam String zipCode) throws IOException {
         return yelpService.findStudios(zipCode);
-    }
-
-
-    @PostMapping("/user/{userId}/add-favorites")
-    public void addFavorites(){
-
-    }
-
-    @GetMapping("/user/{userId}/favorites")
-//    Shoud return a list of YelpResponses
-    public void favorites(){
-//        need to query database to find the favoriates by userId
     }
 
     @GetMapping("/public-reviews/studio/{studioId}/")

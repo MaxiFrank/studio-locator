@@ -16,8 +16,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DetailDto implements Serializable {
-//    private Long userId;
-
     private Long studioId;
     private String studioName;
     private String note;
@@ -26,9 +24,6 @@ public class DetailDto implements Serializable {
     private UserDto userDto;
 
     public DetailDto(Detail detail) {
-//        if (detail.getUserId() != null) {
-//            this.userId = detail.getUserId();
-//        }
         if (detail.getStudioId() != null) {
             this.studioId = detail.getStudioId();
         }
