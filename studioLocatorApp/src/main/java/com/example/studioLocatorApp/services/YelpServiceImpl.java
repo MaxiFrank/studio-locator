@@ -26,8 +26,6 @@ public class YelpServiceImpl implements YelpService {
 
     @Transactional
     public List<String> findStudios(String zipCode) throws IOException {
-//        Should not be list of strings
-//        also need to figure out ways to display results on the same page
         List<String> responseArr = new ArrayList<>();
         OkHttpClient client = new OkHttpClient();
         HttpUrl.Builder urlBuilder
@@ -35,19 +33,14 @@ public class YelpServiceImpl implements YelpService {
         urlBuilder.addQueryParameter("location", zipCode)
                 .addQueryParameter("term", "pole dance");
         String url = urlBuilder.build().toString();
-//        System.out.println(url);
         Request request = new Request.Builder()
                 .url(url)
                 .get()
                 .addHeader("accept", "application/json")
-                .addHeader("Authorization", "fake-token")
+                .addHeader("Authorization", "fake token")
                 .build();
         Response response = client.newCall(request).execute();
         String responseString = response.body().string();
-//        System.out.println("Yelp API response is received and processed");
-        ObjectMapper mapper = new ObjectMapper();
-        YelpResponse yelpResponse = mapper.readValue(responseString, YelpResponse.class);
-//        System.out.println(yelpResponse);
         responseArr.add("/matching-studios.html");
         responseArr.add(responseString);
 

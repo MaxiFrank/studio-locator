@@ -1,4 +1,3 @@
-//let studioDetailForm = document.getElementById('studio-detail-form')
 let detailForms = document.querySelectorAll(".online-form");
 let userId;
 for (c of document.cookie.split(";")) {
@@ -32,7 +31,10 @@ const handleSubmit = async (e) =>{
     let studioName = document.getElementById('studio-name'+ "-" +id).innerHTML
 
     if (isPublic.value == "on"){
-    isPublicBoolean = true}
+    isPublicBoolean = true;}
+
+    if (isPublic.value == "off"){
+        isPublicBoolean = false;}
 
 
     let bodyObj = {
@@ -55,9 +57,25 @@ const handleSubmit = async (e) =>{
     try {const responseArr = await response.json()}
      catch(e){}
 
+   if (responseArr.status === 200){
+
+       window.localStorage.setItem("studios-visited", details);
+       }
+
 }
-//Array.from(forms).forEach(form => console.log(form.getAttribute("id")));
+
 Array.from(detailForms).forEach(form => form.addEventListener("click", handleSubmit));
 
+function changeRadioButtonValue(id) {
+    if (document.querySelector("#"+id).value === "off") {
+        document.querySelector("#"+id).value = "on";
+        document.querySelector("#"+id).checked = true;
 
-//detailForms.addEventListener("click", handleSubmit());
+    }
+        if (document.querySelector("#"+id).value === "on") {
+            document.querySelector("#"+id).value = "off";
+            document.querySelector("#"+id).checked = false;
+        }
+    return  document.querySelector("#"+id).checked;
+}
+

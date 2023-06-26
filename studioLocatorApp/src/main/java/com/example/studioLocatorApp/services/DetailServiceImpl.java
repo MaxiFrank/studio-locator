@@ -6,9 +6,9 @@ import com.example.studioLocatorApp.entities.User;
 import com.example.studioLocatorApp.repositories.DetailRepository;
 import com.example.studioLocatorApp.repositories.UserRepository;
 import jakarta.transaction.Transactional;
-import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -57,28 +57,6 @@ public class DetailServiceImpl implements DetailService {
         });
     }
 
-//    @Override
-//    @Transactional
-//    public List<String> getAllDetailsByUserId(Long userId){
-//        Optional<User> userOptional = userRepository.findById(userId);
-//        List<String> responseArr = new ArrayList<>();
-//        if (userOptional.isPresent()){
-//            List<Detail> detailList = detailRepository.findAllByUserEquals(userOptional.get());
-//
-//            System.out.println("this is what detail list looks like");
-//            for (Detail detail:  detailList){
-//                List<String> studioDetail = new ArrayList<>();
-//                studioDetail.add(detail.getStudioName());
-//                studioDetail.add(detail.getNote());
-//                studioDetail.add(Integer.toString(detail.getReviewScore()));
-//                studioDetail.add(Boolean.toString(detail.getIsPublic()));
-//                responseArr.add(String.join("|", studioDetail));
-//            }
-//            return responseArr;
-////            return detailList.stream().map(detail -> new DetailDto(detail)).collect(Collectors.toList());
-//        }
-//        return Collections.emptyList();
-//    }
 @Override
 @Transactional
 public List<DetailDto> getAllDetailsByUserId(Long userId){
@@ -97,6 +75,17 @@ public List<DetailDto> getAllDetailsByUserId(Long userId){
     @Transactional
     public Optional<DetailDto> getDetailbyIds(Long userUserId, Long studioId) {
         Optional<Detail> detailOptional = detailRepository.findAllByUserUserIdAndStudioId(userUserId, studioId);
+        if (detailOptional.isPresent()) {
+            return Optional.of(new DetailDto(detailOptional.get()));
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    @Transactional
+    public Optional<DetailDto> getDetailsByStudioName(@PathVariable String studioName) {
+        System.out.println(studioName);
+        Optional<Detail> detailOptional = detailRepository.findByStudioNameAndIsPublic(studioName, true);
         if (detailOptional.isPresent()) {
             return Optional.of(new DetailDto(detailOptional.get()));
         }

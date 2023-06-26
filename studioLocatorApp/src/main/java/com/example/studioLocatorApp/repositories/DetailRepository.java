@@ -15,4 +15,6 @@ public interface DetailRepository extends JpaRepository<Detail, Long> {
     Optional<Detail> findAllByUserUserIdAndStudioId(Long userUserId, Long studioId);
     Optional<Detail> findByUserUserIdAndStudioId(Long userUserId, Long studioId);
 
+    Optional<Detail> findByStudioNameAndIsPublic(String studioName, Boolean isPublic);
+
 }

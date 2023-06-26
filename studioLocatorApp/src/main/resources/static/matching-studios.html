@@ -69,21 +69,27 @@
             let rating = o["rating"];
             htmlInsert = htmlInsert + `
             <div class="tab-pane fade show" id="list-${id}" role="tabpanel" aria-labelledby="list-${id}-list">${name} has rating ${rating}.
-                <form id="studio-detail-form-${id}" class="online-form">
+
+                <form id="studio-detail-form-${id}" class="online-form add-space add-top-space">
                     <div class="form-group">
                         <label for="studio-detail" class="form-label">Your Notes on this Studio</label>
                         <textarea class="form-control" id="studio-detail-${id}" rows="3"></textarea>
                     </div>
                     <div class="form-check">
-                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="is-private-${id}" checked>
+                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="is-private-${id}" onclick="changeRadioButtonValue('is-private-${id}');" checked>
                           <label class="form-check-label" for="is-private">
                             Keep your review private. Just for your record.
                           </label>
                          <div id="rating-${id}" value=${rating}> </div>
                          <div style="color:white" id="studio-name-${id}">${name} </div>
                     </div>
+
                     <button type="button" class="detail-submit-button btn btn-outline-secondary" id="form-submit:${id}">Submit</button>
                 </form>
+
+                Here are the public reviews
+<!--                need to get the studio name and put public review here-->
+<!--need to grab the name of the studio and hit the http://localhost:8080/api/v1/details/Revel%20Room%20Studios%20 endpoint-->
             </div>`;
             }
             node.insertAdjacentHTML('afterend', htmlInsert);

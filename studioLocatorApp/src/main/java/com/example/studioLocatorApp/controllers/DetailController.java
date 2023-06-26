@@ -39,4 +39,9 @@ public class DetailController {
     public Optional<DetailDto> getDetailByIds(@PathVariable Long userUserId, @PathVariable Long studioId) {
         return detailService.getDetailbyIds(userUserId, studioId);
     }
+
+    @GetMapping("/{studioName}")
+    public Optional<DetailDto> getDetailsByStudioName(@PathVariable String studioName) {
+        return detailService.getDetailsByStudioName(studioName);
+    }
 }
