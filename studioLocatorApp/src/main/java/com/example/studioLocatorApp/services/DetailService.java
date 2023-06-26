@@ -2,23 +2,17 @@ package com.example.studioLocatorApp.services;
 
 import com.example.studioLocatorApp.dtos.DetailDto;
 import jakarta.transaction.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface DetailService {
-//    @Transactional
-//    void addDetail(DetailDto detailDto, Long studioName, String studioDetail, String isPrivate);
-
-//    @Transactional
-//    need to use studioId as well, how to add a row in postgres using duo id?
-//    user is here but details haven't been created, shouldn't I be passing in the userDto instead of detailDto?
-//    void addDetail(DetailDto detailDto, String studioName, String studioDetail, String isPrivate);
-
     @Transactional
     void addDetail(DetailDto detailDto, Long userId);
 
     @Transactional
+//    need to user userId and studioId to find the detail that I want to delete
     void deleteDetailByIds(Long userUserId, Long studioId);
 
     @Transactional
@@ -29,4 +23,7 @@ public interface DetailService {
 
     @Transactional
     Optional<DetailDto> getDetailbyIds(Long userUserId, Long studioId);
+
+    @Transactional
+    Optional<DetailDto> getDetailsByStudioName(@PathVariable String studioName);
 }

@@ -61,6 +61,18 @@
     padding: 20px;
 }
 
+.studio-button{
+    margin: 20px;
+    }
+
 .form-control{
     width: 30%;
+}
+
+.add-space{
+    padding-bottom: 3em;
+}
+
+.add-top-space{
+    padding-top: 3em;
 }
